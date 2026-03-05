@@ -1,134 +1,983 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Infinity Kingdom - Forge Your Eternal Legend</title>
-    <meta name="description" content="Rejoignez Infinity Kingdom : stratégie MMO avec Immortels légendaires, dragons et alliances. Téléchargez maintenant !">
-    <meta property="og:title" content="Infinity Kingdom">
-    <meta property="og:description" content="Bâtissez votre empire éternel.">
-    <meta property="og:image" content="https://play-lh.googleusercontent.com/9zXJ8V3zXjJ7zJ7zJ7zJ7zJ7zJ7zJ7zJ7zJ7zJ7z">
-    <link rel="icon" href="https://infinitykingdom.com/favicon.ico">
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Arial', sans-serif; line-height: 1.6; color: #333; background: linear-gradient(135deg, #0f0f23, #1a1a3e); overflow-x: hidden; }
-        header { background: rgba(0,0,0,0.9); padding: 1rem 0; position: fixed; width: 100%; z-index: 1000; }
-        nav { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
-        .logo { font-size: 2rem; color: #ffd700; text-decoration: none; }
-        .nav-links { display: flex; list-style: none; gap: 2rem; }
-        .nav-links a { color: white; text-decoration: none; transition: color 0.3s; }
-        .nav-links a:hover { color: #ffd700; }
-        .hero { background: url('https://via.placeholder.com/1920x1080/0f0f23/ffd700?text=Infinity+Kingdom+Hero') center/cover; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; color: white; padding: 0 2rem; margin-top: 80px; }
-        .hero h1 { font-size: 4rem; margin-bottom: 1rem; text-shadow: 2px 2px 4px rgba(0,0,0,0.8); }
-        .cta { background: #ffd700; color: #0f0f23; padding: 1rem 2rem; font-size: 1.2rem; border: none; border-radius: 50px; cursor: pointer; margin: 0.5rem; transition: transform 0.3s; text-decoration: none; display: inline-block; }
-        .cta:hover { transform: scale(1.05); }
-        section { padding: 5rem 2rem; max-width: 1200px; margin: 0 auto; }
-        .video-container { text-align: center; margin: 2rem 0; }
-        .immortels-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
-        .card { background: rgba(255,255,255,0.1); border-radius: 15px; padding: 2rem; text-align: center; backdrop-filter: blur(10px); }
-        .card img { width: 100%; height: 200px; object-fit: cover; border-radius: 10px; margin-bottom: 1rem; }
-        .form-section { background: rgba(0,0,0,0.5); border-radius: 15px; padding: 2rem; }
-        form { display: flex; flex-direction: column; gap: 1rem; max-width: 500px; margin: 0 auto; }
-        input, button { padding: 1rem; border: none; border-radius: 5px; font-size: 1rem; }
-        button { background: #ffd700; color: #0f0f23; cursor: pointer; transition: background 0.3s; }
-        button:hover { background: #ffed4a; }
-        footer { background: #0f0f23; color: white; text-align: center; padding: 2rem; }
-        html { scroll-behavior: smooth; }
-        @media (max-width: 768px) { .hero h1 { font-size: 2.5rem; } .nav-links { display: none; } }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Infinity Kingdom — Summon legendary Immortals, build your empire, dominate Norheim. Free to play on iOS, Android & PC.">
+<title>Infinity Kingdom — Play Free Now | iOS · Android · PC</title>
+
+<!-- Preconnect for fast font load -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://images.weserv.nl">
+<!-- Load only 2 fonts, subset to Latin -->
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+/* ══════════════════════════════════════
+   PERFORMANCE: CSS CUSTOM PROPS + RESET
+══════════════════════════════════════ */
+:root{
+  --gold:#c9a84c;--gold2:#f0d080;--gold3:rgba(201,168,76,.25);
+  --dark:#08090f;--dark2:#0d0f1c;--dark3:#131525;
+  --water:#1ab8ff;--fire:#ff5e1a;--earth:#7ec850;
+  --wind:#a0e8c0;--lightning:#ffe040;--shadow:#b060ff;
+  --text:#e8dfc8;--muted:#6a6258;
+  --radius:4px;
+  --transition:150ms ease;
+  --font-display:'Cinzel Decorative',serif;
+  --font-ui:'Cinzel',serif;
+  --font-body:Georgia,'Times New Roman',serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{
+  background:var(--dark);color:var(--text);
+  font-family:var(--font-body);
+  line-height:1.6;overflow-x:hidden;
+  /* GPU layer for smoother scrolling */
+  -webkit-font-smoothing:antialiased;
+}
+img{max-width:100%;height:auto;display:block}
+button{cursor:pointer;font-family:inherit}
+a{color:inherit;text-decoration:none}
+
+/* ══════════════════════════════════════
+   PERFORMANCE: REDUCED STARFIELD
+   (1 pseudo + CSS only, no JS particles)
+══════════════════════════════════════ */
+body::before{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background-image:
+    radial-gradient(1px 1px at 12% 18%,rgba(255,255,255,.55) 0%,transparent 100%),
+    radial-gradient(1px 1px at 38% 62%,rgba(255,255,255,.3) 0%,transparent 100%),
+    radial-gradient(1.5px 1.5px at 72% 22%,rgba(255,255,255,.45) 0%,transparent 100%),
+    radial-gradient(1px 1px at 88% 78%,rgba(201,168,76,.3) 0%,transparent 100%),
+    radial-gradient(1px 1px at 25% 88%,rgba(255,255,255,.25) 0%,transparent 100%),
+    radial-gradient(1px 1px at 55% 44%,rgba(201,168,76,.2) 0%,transparent 100%);
+  will-change:auto;
+}
+
+/* ══════════════════════════════════════
+   HEADER / NAV
+══════════════════════════════════════ */
+header{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:.9rem 5%;
+  background:rgba(8,9,15,.92);
+  backdrop-filter:blur(8px);
+  border-bottom:1px solid rgba(201,168,76,.12);
+}
+.logo{
+  font-family:var(--font-display);font-size:1rem;font-weight:700;
+  background:linear-gradient(135deg,var(--gold2),var(--gold));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  letter-spacing:.06em;
+}
+nav{display:flex;gap:2rem;align-items:center;font-family:var(--font-ui);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase}
+nav a{color:var(--muted);transition:color var(--transition)}
+nav a:hover{color:var(--gold2)}
+.nav-cta{
+  background:linear-gradient(135deg,var(--gold2),var(--gold));
+  color:var(--dark)!important;font-weight:600;
+  padding:.55rem 1.4rem;
+  clip-path:polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%);
+  transition:filter var(--transition),transform var(--transition);
+}
+.nav-cta:hover{filter:brightness(1.12);transform:translateY(-1px)}
+
+/* ══════════════════════════════════════
+   HERO — ABOVE THE FOLD  (CRO-optimized)
+══════════════════════════════════════ */
+.hero{
+  min-height:100svh;position:relative;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:6rem 5% 4rem;overflow:hidden;
+}
+.hero-bg{
+  position:absolute;inset:0;
+  background:radial-gradient(ellipse 80% 65% at 50% 38%,rgba(201,168,76,.07) 0%,transparent 60%),
+             linear-gradient(180deg,var(--dark) 0%,#090b18 100%);
+  z-index:0;
+}
+/* Lightweight rings — CSS only, no JS */
+.hero-ring{
+  position:absolute;top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  border-radius:50%;border:1px solid rgba(201,168,76,.06);
+  pointer-events:none;z-index:1;
+}
+.hero-ring:nth-child(1){width:min(820px,110vw);height:min(820px,110vw)}
+.hero-ring:nth-child(2){width:min(580px,80vw);height:min(580px,80vw)}
+.hero-ring:nth-child(3){width:min(360px,52vw);height:min(360px,52vw)}
+
+/* Social proof badge — trust signal ABOVE fold */
+.hero-trust{
+  position:relative;z-index:10;
+  display:inline-flex;align-items:center;gap:.6rem;
+  font-family:var(--font-ui);font-size:.62rem;letter-spacing:.25em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:1.4rem;
+  padding:.4rem 1.1rem;
+  border:1px solid rgba(201,168,76,.3);background:rgba(201,168,76,.06);
+}
+.hero-trust .stars{color:#ffd700;font-size:.8rem;letter-spacing:1px}
+.hero-trust::before,.hero-trust::after{content:'◆';font-size:.35rem;opacity:.6}
+
+.hero-content{position:relative;z-index:10;max-width:780px;width:100%}
+h1.hero-title{
+  font-family:var(--font-display);
+  font-size:clamp(2.6rem,7.5vw,6.2rem);
+  font-weight:900;line-height:.92;letter-spacing:.04em;
+  background:linear-gradient(180deg,var(--gold2) 0%,var(--gold) 55%,#8a5c14 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  margin-bottom:.5rem;
+  /* GPU-friendly animation */
+  animation:goldPulse 5s ease-in-out infinite alternate;
+}
+@keyframes goldPulse{
+  from{filter:drop-shadow(0 0 16px rgba(201,168,76,.25))}
+  to{filter:drop-shadow(0 0 38px rgba(201,168,76,.55))}
+}
+.hero-sub{
+  font-family:var(--font-ui);font-size:clamp(.75rem,1.8vw,1.1rem);
+  font-weight:400;letter-spacing:.3em;text-transform:uppercase;
+  color:rgba(232,223,200,.38);margin-bottom:1.2rem;
+}
+.hero-divider{display:flex;align-items:center;justify-content:center;gap:1rem;margin:1rem 0 1.8rem}
+.hero-divider::before,.hero-divider::after{content:'';flex:1;max-width:100px;height:1px}
+.hero-divider::before{background:linear-gradient(90deg,transparent,var(--gold))}
+.hero-divider::after{background:linear-gradient(90deg,var(--gold),transparent)}
+.hero-divider span{color:var(--gold);font-size:.75rem}
+.hero-desc{
+  font-size:clamp(.9rem,1.8vw,1.1rem);line-height:1.75;
+  color:rgba(232,223,200,.58);font-style:italic;
+  max-width:520px;margin:0 auto 2.2rem;
+}
+
+/* PRIMARY CTA — max visibility */
+.hero-ctas{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-bottom:1.8rem}
+.btn-primary{
+  font-family:var(--font-ui);font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;font-weight:600;
+  padding:1.1rem 2.8rem;
+  background:linear-gradient(135deg,var(--gold2),var(--gold) 55%,#8a5c14);
+  color:#05060c;border:none;
+  clip-path:polygon(10px 0%,100% 0%,calc(100% - 10px) 100%,0% 100%);
+  transition:filter var(--transition),transform var(--transition);
+  position:relative;overflow:hidden;
+}
+.btn-primary::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(90deg,transparent 30%,rgba(255,255,255,.2) 50%,transparent 70%);
+  transform:translateX(-100%);
+  transition:transform .5s ease;
+}
+.btn-primary:hover{filter:brightness(1.1);transform:translateY(-2px)}
+.btn-primary:hover::after{transform:translateX(100%)}
+.btn-secondary{
+  font-family:var(--font-ui);font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;font-weight:400;
+  padding:1.1rem 2.2rem;background:transparent;color:var(--gold);
+  border:1px solid rgba(201,168,76,.38);
+  clip-path:polygon(10px 0%,100% 0%,calc(100% - 10px) 100%,0% 100%);
+  transition:background var(--transition),border-color var(--transition);
+}
+.btn-secondary:hover{background:rgba(201,168,76,.08);border-color:var(--gold)}
+
+/* Download badges row */
+.hero-badges{display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap}
+.badge{
+  display:flex;align-items:center;gap:.5rem;
+  padding:.55rem 1.1rem;
+  border:1px solid rgba(201,168,76,.18);background:rgba(201,168,76,.04);
+  font-family:var(--font-ui);transition:border-color var(--transition),background var(--transition);
+}
+.badge:hover{border-color:rgba(201,168,76,.5);background:rgba(201,168,76,.09)}
+.badge-icon{font-size:1.2rem}
+.badge-text{text-align:left}
+.badge-small{font-size:.5rem;letter-spacing:.1em;color:var(--muted);text-transform:uppercase;display:block}
+.badge-big{font-size:.78rem;font-family:var(--font-ui);color:var(--gold2);font-weight:600;display:block}
+
+/* Floating hero portraits — lightweight, CSS animation only */
+.hero-portraits{position:absolute;inset:0;pointer-events:none;z-index:5}
+.fp{
+  position:absolute;border-radius:50%;overflow:hidden;border:2px solid;
+  /* Use will-change only on transform for GPU compositing */
+  will-change:transform;
+  animation:fp-float 7s ease-in-out infinite;
+  background:rgba(13,15,28,.5);
+}
+.fp img{
+  width:100%;height:100%;object-fit:cover;object-position:top center;
+  /* Lazy load for perf */
+  loading:lazy;
+}
+@keyframes fp-float{0%,100%{transform:translateY(0)}45%{transform:translateY(-10px)}75%{transform:translateY(5px)}}
+.fp:nth-child(1){width:clamp(70px,9vw,110px);height:clamp(70px,9vw,110px);top:20%;left:4%;border-color:rgba(26,184,255,.7);box-shadow:0 0 24px rgba(26,184,255,.35);animation-delay:0s}
+.fp:nth-child(2){width:clamp(60px,8vw,92px);height:clamp(60px,8vw,92px);top:58%;left:2%;border-color:rgba(255,94,26,.65);box-shadow:0 0 20px rgba(255,94,26,.32);animation-delay:-2s}
+.fp:nth-child(3){width:clamp(70px,9vw,108px);height:clamp(70px,9vw,108px);top:20%;right:4%;border-color:rgba(201,168,76,.75);box-shadow:0 0 24px rgba(201,168,76,.4);animation-delay:-3.5s}
+.fp:nth-child(4){width:clamp(60px,8vw,90px);height:clamp(60px,8vw,90px);top:58%;right:2%;border-color:rgba(126,200,80,.65);box-shadow:0 0 20px rgba(126,200,80,.32);animation-delay:-1s}
+.fp:nth-child(5){width:clamp(55px,7vw,84px);height:clamp(55px,7vw,84px);bottom:20%;left:14%;border-color:rgba(255,224,64,.55);box-shadow:0 0 18px rgba(255,224,64,.28);animation-delay:-4s}
+.fp:nth-child(6){width:clamp(55px,7vw,84px);height:clamp(55px,7vw,84px);bottom:20%;right:14%;border-color:rgba(176,96,255,.55);box-shadow:0 0 18px rgba(176,96,255,.28);animation-delay:-1.8s}
+
+/* ══════════════════════════════════════
+   SOCIAL PROOF BAR
+══════════════════════════════════════ */
+.proof-bar{
+  position:relative;z-index:10;
+  background:rgba(13,15,28,.9);
+  border-top:1px solid rgba(201,168,76,.1);
+  border-bottom:1px solid rgba(201,168,76,.1);
+  padding:1.1rem 5%;
+  display:flex;justify-content:center;gap:3rem;flex-wrap:wrap;align-items:center;
+}
+.proof-item{
+  display:flex;align-items:center;gap:.7rem;
+  font-family:var(--font-ui);font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);
+}
+.proof-item strong{color:var(--gold2);font-size:1.1rem;font-family:var(--font-display);font-weight:700}
+.proof-item .stars-sm{color:#ffd700;font-size:.75rem;letter-spacing:1px}
+.proof-divider{width:1px;height:28px;background:rgba(201,168,76,.15)}
+
+/* ══════════════════════════════════════
+   SHARED SECTION
+══════════════════════════════════════ */
+section{position:relative;z-index:10;padding:5rem 5%}
+.sh{text-align:center;margin-bottom:3.5rem}
+.eyebrow{font-family:var(--font-ui);font-size:.62rem;letter-spacing:.42em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:.9rem}
+.sec-title{
+  font-family:var(--font-display);font-size:clamp(1.7rem,3.5vw,2.8rem);font-weight:700;
+  background:linear-gradient(135deg,var(--gold2),var(--gold));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  line-height:1.15;margin-bottom:.8rem;
+}
+.sec-rule{display:flex;align-items:center;justify-content:center;gap:.7rem;margin:.6rem auto 0;max-width:200px}
+.sec-rule::before,.sec-rule::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(201,168,76,.4))}
+.sec-rule::after{background:linear-gradient(90deg,rgba(201,168,76,.4),transparent)}
+.sec-rule span{color:var(--gold);font-size:.55rem}
+.sec-desc{max-width:520px;margin:.9rem auto 0;font-size:1rem;line-height:1.8;color:rgba(232,223,200,.5);font-style:italic}
+
+/* ══════════════════════════════════════
+   VIDEO SECTION
+══════════════════════════════════════ */
+.video-section{background:var(--dark2);padding:4rem 5%}
+.video-wrap{
+  max-width:900px;margin:0 auto;
+  position:relative;border:1px solid rgba(201,168,76,.2);
+  background:#000;
+}
+.video-wrap::before{
+  content:'';position:absolute;inset:-1px;z-index:-1;
+  background:linear-gradient(135deg,var(--gold),transparent 40%,transparent 60%,var(--gold));
+  border-radius:2px;
+}
+/* Responsive 16:9 container with YouTube embed */
+.video-responsive{position:relative;padding-bottom:56.25%;height:0;overflow:hidden}
+.video-responsive iframe{
+  position:absolute;top:0;left:0;width:100%;height:100%;
+  border:none;
+}
+/* Poster fallback (shown before user interacts) */
+.video-poster{
+  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  cursor:pointer;z-index:2;
+  background:linear-gradient(180deg,rgba(8,9,15,.3) 0%,rgba(8,9,15,.7) 100%);
+}
+.video-poster img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-1;filter:brightness(.6) saturate(1.2)}
+.play-btn{
+  width:72px;height:72px;border-radius:50%;
+  background:rgba(201,168,76,.9);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.6rem;color:var(--dark);
+  transition:transform .2s,background .2s;
+  border:3px solid rgba(255,255,255,.3);
+}
+.video-poster:hover .play-btn{transform:scale(1.1);background:var(--gold2)}
+.video-label{
+  position:absolute;bottom:1.2rem;left:50%;transform:translateX(-50%);
+  font-family:var(--font-ui);font-size:.62rem;letter-spacing:.25em;text-transform:uppercase;
+  color:rgba(232,223,200,.6);white-space:nowrap;
+}
+
+/* ══════════════════════════════════════
+   HEROES GRID
+══════════════════════════════════════ */
+.heroes-section{background:linear-gradient(180deg,var(--dark) 0%,var(--dark2) 50%,var(--dark) 100%)}
+.heroes-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(230px,1fr));
+  gap:1.2rem;max-width:1160px;margin:0 auto;
+}
+.hcard{
+  background:linear-gradient(180deg,rgba(20,22,38,.95),rgba(10,11,20,.98));
+  border:1px solid rgba(201,168,76,.14);
+  overflow:hidden;cursor:pointer;
+  transition:transform var(--transition),box-shadow var(--transition),border-color var(--transition);
+  clip-path:polygon(0 0,calc(100% - 14px) 0,100% 14px,100% 100%,14px 100%,0 calc(100% - 14px));
+  /* Contain paint for performance */
+  contain:layout style paint;
+}
+.hcard:hover{transform:translateY(-5px);border-color:var(--gold);box-shadow:0 16px 50px rgba(0,0,0,.55),0 0 24px rgba(201,168,76,.2)}
+.hcard-img{
+  width:100%;height:200px;position:relative;overflow:hidden;
+  background:linear-gradient(180deg,#0d1020,#060810);
+}
+.hcard-img img{
+  width:100%;height:100%;object-fit:cover;object-position:top center;
+  transition:transform .35s ease;
+  filter:brightness(.85) saturate(1.15);
+  loading:lazy;
+}
+.hcard:hover .hcard-img img{transform:scale(1.05)}
+.hcard-img::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:52%;
+  background:linear-gradient(180deg,transparent,rgba(8,9,15,.96));
+  pointer-events:none;
+}
+.hcard-badge{
+  position:absolute;top:.7rem;right:.7rem;
+  width:30px;height:30px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:.8rem;border:2px solid;z-index:2;
+}
+.hcard-body{padding:.9rem 1.1rem 1.2rem}
+.hcard-name{font-family:var(--font-ui);font-size:.9rem;font-weight:600;color:var(--gold2);margin-bottom:.25rem}
+.hcard-type{font-family:var(--font-ui);font-size:.52rem;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);margin-bottom:.6rem}
+.hcard-desc{font-size:.8rem;line-height:1.6;color:rgba(232,223,200,.48);font-style:italic}
+.hcard-stars{display:flex;gap:2px;margin-top:.7rem}
+.star{color:var(--gold);font-size:.68rem}.star.e{color:rgba(201,168,76,.18)}
+/* element badge variants */
+.ew{background:rgba(26,184,255,.14);border-color:rgba(26,184,255,.6);color:var(--water)}
+.ef{background:rgba(255,94,26,.14);border-color:rgba(255,94,26,.6);color:var(--fire)}
+.ee{background:rgba(126,200,80,.14);border-color:rgba(126,200,80,.6);color:var(--earth)}
+.ev{background:rgba(160,232,192,.14);border-color:rgba(160,232,192,.6);color:var(--wind)}
+.el{background:rgba(255,224,64,.14);border-color:rgba(255,224,64,.6);color:var(--lightning)}
+.es{background:rgba(176,96,255,.14);border-color:rgba(176,96,255,.6);color:var(--shadow)}
+
+/* ══════════════════════════════════════
+   ELEMENTS STRIP
+══════════════════════════════════════ */
+.elements-section{background:var(--dark2);padding:4.5rem 5%}
+.el-wheel{display:flex;justify-content:center;gap:.8rem;flex-wrap:wrap;max-width:840px;margin:0 auto}
+.el-pill{
+  display:flex;align-items:center;gap:.6rem;
+  padding:.75rem 1.3rem;border:1px solid;background:rgba(255,255,255,.02);
+  cursor:pointer;transition:background var(--transition),transform var(--transition);
+  font-family:var(--font-ui);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;
+  clip-path:polygon(7px 0%,100% 0%,calc(100% - 7px) 100%,0% 100%);
+}
+.el-pill:hover{transform:translateY(-2px)}
+.el-pill .ei{font-size:1.1rem}
+.pw{border-color:rgba(26,184,255,.4);color:var(--water)}.pw:hover{background:rgba(26,184,255,.09)}
+.pf{border-color:rgba(255,94,26,.4);color:var(--fire)}.pf:hover{background:rgba(255,94,26,.09)}
+.pe{border-color:rgba(126,200,80,.4);color:var(--earth)}.pe:hover{background:rgba(126,200,80,.09)}
+.pv{border-color:rgba(160,232,192,.4);color:var(--wind)}.pv:hover{background:rgba(160,232,192,.07)}
+.pl{border-color:rgba(255,224,64,.4);color:var(--lightning)}.pl:hover{background:rgba(255,224,64,.09)}
+.ph{border-color:rgba(255,232,160,.4);color:var(--holy)}.ph:hover{background:rgba(255,232,160,.07)}
+.ps{border-color:rgba(176,96,255,.4);color:var(--shadow)}.ps:hover{background:rgba(176,96,255,.09)}
+
+/* ══════════════════════════════════════
+   REVIEWS SECTION
+══════════════════════════════════════ */
+.reviews-section{background:var(--dark);padding:5rem 5%}
+.reviews-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1.2rem;max-width:1100px;margin:0 auto}
+.rcard{
+  background:rgba(13,15,28,.8);
+  border:1px solid rgba(201,168,76,.12);
+  padding:1.6rem 1.5rem;
+  position:relative;
+  contain:layout style;
+}
+.rcard::before{
+  content:'"';position:absolute;top:.5rem;left:1.2rem;
+  font-size:4rem;color:rgba(201,168,76,.1);
+  font-family:Georgia,serif;line-height:1;
+}
+.rcard-stars{color:#ffd700;font-size:.75rem;margin-bottom:.8rem;letter-spacing:2px}
+.rcard-text{font-size:.9rem;line-height:1.7;color:rgba(232,223,200,.6);font-style:italic;margin-bottom:1rem}
+.rcard-author{display:flex;align-items:center;gap:.6rem}
+.rcard-avatar{
+  width:34px;height:34px;border-radius:50%;
+  background:linear-gradient(135deg,var(--gold),rgba(201,168,76,.3));
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-ui);font-size:.75rem;color:var(--dark);font-weight:600;
+  flex-shrink:0;
+}
+.rcard-name{font-family:var(--font-ui);font-size:.65rem;letter-spacing:.1em;color:var(--gold2)}
+.rcard-meta{font-size:.6rem;color:var(--muted);margin-top:.15rem}
+/* Overall rating callout */
+.rating-callout{
+  text-align:center;margin-bottom:3rem;
+  font-family:var(--font-ui);
+}
+.rating-big{
+  font-family:var(--font-display);font-size:4.5rem;font-weight:700;
+  background:linear-gradient(135deg,var(--gold2),var(--gold));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  line-height:1;
+}
+.rating-stars-big{color:#ffd700;font-size:1.4rem;letter-spacing:3px;margin:.4rem 0}
+.rating-count{font-size:.7rem;letter-spacing:.2em;color:var(--muted);text-transform:uppercase}
+
+/* ══════════════════════════════════════
+   FEATURES
+══════════════════════════════════════ */
+.features-section{background:var(--dark2)}
+.feat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1px;background:rgba(201,168,76,.07);max-width:1100px;margin:0 auto}
+.feat{background:var(--dark2);padding:2.5rem 2rem;position:relative;overflow:hidden;transition:background var(--transition)}
+.feat::before{content:attr(data-n);position:absolute;bottom:-.8rem;right:1.2rem;font-family:var(--font-display);font-size:5rem;color:rgba(201,168,76,.04);line-height:1;pointer-events:none}
+.feat:hover{background:rgba(201,168,76,.025)}
+.feat-icon{font-size:2.2rem;margin-bottom:1.2rem;display:block;filter:drop-shadow(0 0 8px rgba(201,168,76,.35))}
+.feat h3{font-family:var(--font-ui);font-size:1rem;font-weight:600;color:var(--gold2);margin-bottom:.65rem}
+.feat p{font-size:.88rem;line-height:1.72;color:rgba(232,223,200,.48)}
+.feat-tag{display:inline-block;margin-top:1rem;font-family:var(--font-ui);font-size:.52rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);border:1px solid rgba(201,168,76,.22);padding:.28rem .7rem}
+
+/* ══════════════════════════════════════
+   FAQ SECTION
+══════════════════════════════════════ */
+.faq-section{background:var(--dark);padding:5rem 5%}
+.faq-list{max-width:720px;margin:0 auto;display:flex;flex-direction:column;gap:.6rem}
+.faq-item{
+  border:1px solid rgba(201,168,76,.12);
+  background:rgba(13,15,28,.7);
+  overflow:hidden;
+}
+.faq-q{
+  width:100%;padding:1.1rem 1.4rem;
+  background:transparent;border:none;color:var(--gold2);
+  font-family:var(--font-ui);font-size:.82rem;font-weight:600;letter-spacing:.04em;
+  display:flex;justify-content:space-between;align-items:center;gap:1rem;
+  text-align:left;cursor:pointer;
+  transition:background var(--transition);
+}
+.faq-q:hover{background:rgba(201,168,76,.04)}
+.faq-q .faq-icon{
+  flex-shrink:0;width:22px;height:22px;border-radius:50%;
+  border:1px solid rgba(201,168,76,.35);
+  display:flex;align-items:center;justify-content:center;
+  font-size:.7rem;color:var(--gold);
+  transition:transform .25s ease;
+}
+.faq-item.open .faq-icon{transform:rotate(45deg)}
+.faq-a{
+  max-height:0;overflow:hidden;
+  transition:max-height .3s ease,padding .3s ease;
+}
+.faq-item.open .faq-a{max-height:200px}
+.faq-a-inner{
+  padding:.2rem 1.4rem 1.2rem;
+  font-size:.88rem;line-height:1.75;color:rgba(232,223,200,.5);
+  font-style:italic;
+}
+
+/* ══════════════════════════════════════
+   CTA SECTION
+══════════════════════════════════════ */
+.cta-section{
+  text-align:center;padding:7rem 5%;position:relative;overflow:hidden;
+  background:linear-gradient(180deg,var(--dark) 0%,#050610 100%);
+}
+.cta-glow{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:min(600px,90vw);height:min(600px,90vw);
+  background:radial-gradient(circle,rgba(201,168,76,.07),transparent 65%);
+  pointer-events:none;
+}
+.cta-eyebrow{font-family:var(--font-ui);font-size:.62rem;letter-spacing:.42em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:1rem;position:relative;z-index:1}
+.cta-title{
+  font-family:var(--font-display);font-size:clamp(2.2rem,5vw,4.2rem);font-weight:900;
+  background:linear-gradient(180deg,var(--gold2),var(--gold) 60%,#8a5c14);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  line-height:1.08;margin:1.2rem 0;position:relative;z-index:1;
+}
+.cta-sub{font-size:1rem;line-height:1.8;color:rgba(232,223,200,.5);max-width:460px;margin:0 auto 2.5rem;font-style:italic;position:relative;z-index:1}
+.cta-btns{display:flex;gap:1rem;justify-content:center;position:relative;z-index:1;flex-wrap:wrap;margin-bottom:2rem}
+/* Urgency badge */
+.urgency{
+  position:relative;z-index:1;
+  display:inline-flex;align-items:center;gap:.5rem;
+  font-family:var(--font-ui);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;
+  color:rgba(232,223,200,.4);margin-bottom:1.8rem;
+}
+.urgency::before{content:'';display:inline-block;width:6px;height:6px;border-radius:50%;background:#4aff88;box-shadow:0 0 8px #4aff88;animation:blink 2s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+.dl-row{display:flex;gap:.75rem;justify-content:center;position:relative;z-index:1;flex-wrap:wrap}
+
+/* ══════════════════════════════════════
+   FOOTER
+══════════════════════════════════════ */
+footer{
+  border-top:1px solid rgba(201,168,76,.1);
+  padding:1.8rem 5%;
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;
+  font-family:var(--font-ui);font-size:.58rem;letter-spacing:.1em;color:var(--muted);
+  position:relative;z-index:10;
+}
+.footer-logo{background:linear-gradient(135deg,var(--gold2),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-size:.78rem;font-weight:700}
+.footer-links{display:flex;gap:1.5rem}
+.footer-links a{color:var(--muted);transition:color var(--transition)}
+.footer-links a:hover{color:var(--gold2)}
+
+/* ══════════════════════════════════════
+   FADE-UP (Intersection Observer)
+   — no opacity flicker on fast loads
+══════════════════════════════════════ */
+.fu{opacity:0;transform:translateY(24px);transition:opacity .65s ease,transform .65s ease}
+.fu.v{opacity:1;transform:translateY(0)}
+.fu:nth-child(2){transition-delay:.08s}
+.fu:nth-child(3){transition-delay:.16s}
+.fu:nth-child(4){transition-delay:.24s}
+.fu:nth-child(5){transition-delay:.32s}
+.fu:nth-child(6){transition-delay:.40s}
+.fu:nth-child(7){transition-delay:.48s}
+.fu:nth-child(8){transition-delay:.56s}
+
+/* ══════════════════════════════════════
+   MOBILE — < 768px
+══════════════════════════════════════ */
+@media(max-width:768px){
+  header{padding:.8rem 4%}
+  nav a:not(.nav-cta){display:none}/* hide links, keep CTA */
+  .nav-cta{padding:.45rem 1.1rem;font-size:.62rem}
+  .hero{padding:5.5rem 5% 3rem;min-height:auto}
+  .fp{display:none}/* hide floating portraits on mobile */
+  .proof-bar{gap:1.2rem}
+  .proof-divider{display:none}
+  .heroes-grid{grid-template-columns:repeat(2,1fr);gap:.9rem}
+  .reviews-grid{grid-template-columns:1fr}
+  .feat-grid{grid-template-columns:1fr}
+  .cta-section{padding:5rem 5%}
+  footer{flex-direction:column;text-align:center}
+  .footer-links{justify-content:center}
+  .el-wheel{gap:.6rem}
+  .el-pill{font-size:.6rem;padding:.6rem 1rem}
+  .dl-row{gap:.6rem}
+  .hero-badges{gap:.5rem}
+}
+@media(max-width:480px){
+  .heroes-grid{grid-template-columns:1fr 1fr}
+  .proof-bar{flex-direction:column;gap:.8rem;text-align:center}
+  .hero-ctas{flex-direction:column;align-items:center}
+  .btn-primary,.btn-secondary{width:100%;max-width:300px;text-align:center}
+  .cta-btns{flex-direction:column;align-items:center}
+}
+</style>
 </head>
 <body>
-    <header>
-        <nav>
-            <a href="#hero" class="logo">∞ Kingdom</a>
-            <ul class="nav-links">
-                <li><a href="#immortels">Immortels</a></li>
-                <li><a href="#elements">Éléments</a></li>
-                <li><a href="#why">Pourquoi Jouer</a></li>
-                <li><a href="#form">Alliance</a></li>
-            </ul>
-        </nav>
-    </header>
 
-    <section id="hero" class="hero">
-        <h1>INFINITY KINGDOM</h1>
-        <p>Forged Your Eternal Legend</p>
-        <a href="https://play.google.com/store/apps/details?id=com.gtarcade.ioe.global" class="cta" target="_blank">Get it on Google Play</a>
-        <a href="https://apps.apple.com/app/infinity-kingdom/id1487451427" class="cta" target="_blank">Download on the App Store</a>
-    </section>
+<!-- ══ HEADER ══ -->
+<header>
+  <div class="logo">Infinity Kingdom</div>
+  <nav>
+    <a href="#heroes">Immortals</a>
+    <a href="#video">Gameplay</a>
+    <a href="#reviews">Reviews</a>
+    <a href="#faq">FAQ</a>
+    <a href="#cta" class="nav-cta">▶ Play Now</a>
+  </nav>
+</header>
 
-    <section id="video" class="section">
-        <div class="video-container">
-            <iframe width="100%" height="400" src="https://www.youtube.com/embed/ruRxIGmsCgs" title="Trailer Infinity Kingdom" frameborder="0" allowfullscreen></iframe>
-        </div>
-    </section>
+<!-- ══ HERO — ABOVE THE FOLD ══ -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-ring"></div><div class="hero-ring"></div><div class="hero-ring"></div>
 
-    <section id="immortels">
-        <h2>🏛️ Hall of Immortals</h2>
-        <div class="immortels-grid">
-            <div class="card">
-                <img src="https://static.wikia.nocookie.net/infinitykingdom/images/0/0a/Merlin.png/revision/latest?cb=20211201000000" alt="Merlin">
-                <h3>⭐⭐⭐⭐⭐ Merlin</h3>
-                <p>Magicien légendaire maître de la sorcellerie.</p>
-            </div>
-            <div class="card">
-                <img src="https://static.wikia.nocookie.net/infinitykingdom/images/1/1a/Attila.png/revision/latest?cb=20211201000000" alt="Attila">
-                <h3>⭐⭐⭐⭐⭐ Attila</h3>
-                <p>Conquérant invincible de la steppe.</p>
-            </div>
-            <div class="card">
-                <img src="https://static.wikia.nocookie.net/infinitykingdom/images/2/2a/Cleopatra.png/revision/latest?cb=20211201000000" alt="Cleopatra">
-                <h3>⭐⭐⭐⭐⭐ Cleopatra</h3>
-                <p>Reine charismatique du Nil.</p>
-            </div>
-        </div>
-    </section>
+  <!-- Floating portraits — lazy loaded -->
+  <div class="hero-portraits" aria-hidden="true">
+    <div class="fp"><img src="https://images.weserv.nl/?url=static.wikia.nocookie.net/infinity-kingdom/images/2/2f/Merlin_icon.png/revision/latest&w=110&q=80&we" alt="" loading="lazy"></div>
+    <div class="fp"><img src="https://images.weserv.nl/?url=static.wikia.nocookie.net/infinity-kingdom/images/b/b9/Attila_the_Hun_icon.png/revision/latest&w=92&q=80&we" alt="" loading="lazy"></div>
+    <div class="fp"><img src="https://images.weserv.nl/?url=static.wikia.nocookie.net/infinity-kingdom/images/9/98/Ramesses_II_icon.png/revision/latest&w=110&q=80&we" alt="" loading="lazy"></div>
+    <div class="fp"><img src="https://images.weserv.nl/?url=static.wikia.nocookie.net/infinity-kingdom/images/9/97/Yoshitsune_icon.png/revision/latest&w=92&q=80&we" alt="" loading="lazy"></div>
+    <div class="fp"><img src="https://images.weserv.nl/?url=static.wikia.nocookie.net/infinity-kingdom/images/7/77/Julius_Caesar_icon.png/revision/latest&w=84&q=80&we" alt="" loading="lazy"></div>
+    <div class="fp"><img src="https://images.weserv.nl/?url=static.wikia.nocookie.net/infinity-kingdom/images/c/cc/Cleopatra_icon.png/revision/latest&w=84&q=80&we" alt="" loading="lazy"></div>
+  </div>
 
-    <section id="elements">
-        <h2>🌟 Seven Elements</h2>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; text-align: center;">
-            <div>💧 <strong>Water</strong></div>
-            <div>🔥 <strong>Fire</strong></div>
-            <div>🌪️ <strong>Wind</strong></div>
-            <div>⛰️ <strong>Earth</strong></div>
-            <div>⚡ <strong>Lightning</strong></div>
-            <div>🌑 <strong>Dark</strong></div>
-            <div>☀️ <strong>Light</strong></div>
-        </div>
-    </section>
+  <!-- Social proof ABOVE fold -->
+  <div class="hero-trust">
+    <span class="stars">★★★★★</span>
+    <span>Rated 4.7/5 · 50M+ Downloads</span>
+  </div>
 
-    <section id="why">
-        <h2>Pourquoi Jouer ?</h2>
-        <ul style="max-width: 800px; margin: 0 auto; font-size: 1.2rem;">
-            <li>PvP épique et raids mondiaux</li>
-            <li>City Building immersif</li>
-            <li>Dragons personnalisables</li>
-            <li>Alliances globales</li>
-        </ul>
-    </section>
+  <div class="hero-content">
+    <h1 class="hero-title">INFINITY<br>KINGDOM</h1>
+    <p class="hero-sub">Strategy · Immortals · Empire</p>
+    <div class="hero-divider"><span>✦</span></div>
+    <p class="hero-desc">Summon legendary Immortals. Build your empire. Crush your enemies across the land of Norheim — free to play on all platforms.</p>
 
-    <section id="form" class="form-section">
-        <h2>Rejoignez Notre Alliance</h2>
-        <form action="#" method="post">
-            <input type="text" placeholder="Votre Nom d'Utilisateur" required>
-            <input type="email" placeholder="Email" required>
-            <button type="submit">Inscription Alliance</button>
-        </form>
-    </section>
+    <!-- PRIMARY CTAs — maximum visibility -->
+    <div class="hero-ctas">
+      <button class="btn-primary" onclick="document.getElementById('cta').scrollIntoView({behavior:'smooth'})">▶ Play Now — Free</button>
+      <button class="btn-secondary" onclick="document.getElementById('video').scrollIntoView({behavior:'smooth'})">Watch Trailer</button>
+    </div>
 
-    <footer>
-        <p>&copy; 2026 Infinity Kingdom. Créé pour challenge stage. <a href="#hero">Haut de page</a></p>
-    </footer>
+    <!-- Download badges -->
+    <div class="hero-badges">
+      <div class="badge"><span class="badge-icon">🍎</span><div class="badge-text"><span class="badge-small">Download on the</span><span class="badge-big">App Store</span></div></div>
+      <div class="badge"><span class="badge-icon">▶</span><div class="badge-text"><span class="badge-small">Get it on</span><span class="badge-big">Google Play</span></div></div>
+      <div class="badge"><span class="badge-icon">🖥</span><div class="badge-text"><span class="badge-small">Play on</span><span class="badge-big">PC / Mac</span></div></div>
+    </div>
+  </div>
+</section>
 
-    <script>
-        // Formulaire simulé (remplacez par backend réel)
-        document.querySelector('form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('Inscription envoyée ! Merci de rejoindre l\'alliance.');
-        });
-    </script>
+<!-- ══ SOCIAL PROOF BAR ══ -->
+<div class="proof-bar">
+  <div class="proof-item"><strong>50M+</strong><span>Downloads<br>worldwide</span></div>
+  <div class="proof-divider"></div>
+  <div class="proof-item">
+    <div>
+      <div class="stars-sm">★★★★★</div>
+      <strong>4.7<span style="font-size:.7rem">/5</span></strong>
+    </div>
+    <span>App Store &<br>Google Play</span>
+  </div>
+  <div class="proof-divider"></div>
+  <div class="proof-item"><strong>#1</strong><span>Strategy Game<br>in 42 countries</span></div>
+  <div class="proof-divider"></div>
+  <div class="proof-item"><strong>180+</strong><span>Legendary<br>Immortals</span></div>
+</div>
+
+<!-- ══ VIDEO SECTION ══ -->
+<section id="video" class="video-section">
+  <div class="sh fu">
+    <span class="eyebrow">Gameplay Trailer</span>
+    <h2 class="sec-title">See Norheim in Action</h2>
+    <div class="sec-rule"><span>◆</span></div>
+  </div>
+  <div class="video-wrap fu">
+    <div class="video-responsive">
+      <!-- Loads only on click — preserves page performance -->
+      <div class="video-poster" id="vposter" onclick="loadVideo()">
+        <img src="https://images.weserv.nl/?url=static.wikia.nocookie.net/infinity-kingdom/images/2/2f/Merlin_icon.png/revision/latest&w=900&q=75&we" alt="Infinity Kingdom gameplay trailer" loading="lazy">
+        <div class="play-btn">▶</div>
+        <span class="video-label">Infinity Kingdom — Official Gameplay Trailer</span>
+      </div>
+      <iframe id="yt-frame" title="Infinity Kingdom Trailer" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="display:none"></iframe>
+    </div>
+  </div>
+</section>
+
+<!-- ══ HEROES GRID ══ -->
+<section id="heroes" class="heroes-section">
+  <div class="sh fu">
+    <span class="eyebrow">Hall of Immortals</span>
+    <h2 class="sec-title">The Legendaries</h2>
+    <div class="sec-rule"><span>◆</span></div>
+    <p class="sec-desc">Exceptional historical and mythical figures — summon them, level them up, and lead them to victory.</p>
+  </div>
+
+  <div class="heroes-grid">
+    <div class="hcard fu">
+      <div class="hcard-img">
+        <img src="https://images.weserv.nl/?url=static.wikia.nocookie.net/infinity-kingdom/images/2/2f/Merlin_icon.png/revision/latest&w=260&h=200&fit=cover&q=82&we" alt="Merlin" loading="lazy">
+        <div class="hcard-badge ew">💧</div>
+      </div>
+      <div class="hcard-body">
+        <div class="hcard-name">Merlin</div>
+        <div class="hcard-type">Water · Magic · Legendary</div>
+        <p class="hcard-desc">Camelot's archmage — his Ice Storm devastates entire rows.</p>
+        <div class="hcard-stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
+      </div>
+    </div>
+    <div class="hcard fu">
+      <div class="hcard-img">
+        <img src="https://images.weserv.nl/?url=static.wikia.nocookie.net/infinity-kingdom/images/b/b9/Attila_the_Hun_icon.png/revision/latest&w=260&h=200&fit=cover&q=82&we" alt="Attila the Hun" loading="lazy">
+        <div class="hcard-badge ee">🌿</div>
+      </div>
+      <div class="hcard-body">
+        <div class="hcard-name">Attila the Hun</div>
+        <div class="hcard-type">Earth · Attack · Legendary</div>
+        <p class="hcard-desc">The Scourge of God — cavalry that sweeps everything in its path.</p>
+        <div class="hcard-stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
+      </div>
+    </div>
+    <div class="hcard fu">
+      <div class="hcard-img">
+        <img src="https://images.weserv.nl/?url=static.wikia.nocookie.net/infinity-kingdom/images/c/cc/Cleopatra_icon.png/revision/latest&w=260&h=200&fit=cover&q=82&we" alt="Cleopatra" loading="lazy">
+        <div class="hcard-badge es">🌑</div>
+      </div>
+      <div class="hcard-body">
+        <div class="hcard-name">Cleopatra</div>
+        <div class="hcard-type">Shadow · Support · Legendary</div>
+        <p class="hcard-desc">Egypt's queen — mystical buffs that shift any battle's tide.</p>
+        <div class="hcard-stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star e">★</span></div>
+      </div>
+    </div>
+    <div class="hcard fu">
+      <div class="hcard-img">
+        <img src="https://images.weserv.nl/?url=static.wikia.nocookie.net/infinity-kingdom/images/7/77/Julius_Caesar_icon.png/revision/latest&w=260&h=200&fit=cover&q=82&we" alt="Julius Caesar" loading="lazy">
+        <div class="hcard-badge el">⚡</div>
+      </div>
+      <div class="hcard-body">
+        <div class="hcard-name">Julius Caesar</div>
+        <div class="hcard-type">Lightning · Defense · Legendary</div>
+        <p class="hcard-desc">Rome's greatest general — undefeated on any battlefield.</p>
+        <div class="hcard-stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
+      </div>
+    </div>
+    <div class="hcard fu">
+      <div class="hcard-img">
+        <img src="https://images.weserv.nl/?url=static.wikia.nocookie.net/infinity-kingdom/images/9/98/Ramesses_II_icon.png/revision/latest&w=260&h=200&fit=cover&q=82&we" alt="Ramesses II" loading="lazy">
+        <div class="hcard-badge ef">🔥</div>
+      </div>
+      <div class="hcard-body">
+        <div class="hcard-name">Ramesses II</div>
+        <div class="hcard-type">Fire · Attack · Legendary</div>
+        <p class="hcard-desc">The Pharaoh warrior — solar archers that obliterate enemy lines.</p>
+        <div class="hcard-stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star e">★</span></div>
+      </div>
+    </div>
+    <div class="hcard fu">
+      <div class="hcard-img">
+        <img src="https://images.weserv.nl/?url=static.wikia.nocookie.net/infinity-kingdom/images/9/97/Yoshitsune_icon.png/revision/latest&w=260&h=200&fit=cover&q=82&we" alt="Yoshitsune" loading="lazy">
+        <div class="hcard-badge ev">🌀</div>
+      </div>
+      <div class="hcard-body">
+        <div class="hcard-name">Yoshitsune</div>
+        <div class="hcard-type">Wind · Ranged · Epic</div>
+        <p class="hcard-desc">Japan's samurai legend — swift as wind, impossible to catch.</p>
+        <div class="hcard-stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star e">★</span></div>
+      </div>
+    </div>
+    <div class="hcard fu">
+      <div class="hcard-img">
+        <img src="https://images.weserv.nl/?url=static.wikia.nocookie.net/infinity-kingdom/images/f/fa/Harald_III_icon.png/revision/latest&w=260&h=200&fit=cover&q=82&we" alt="Harald III" loading="lazy">
+        <div class="hcard-badge ew">💧</div>
+      </div>
+      <div class="hcard-body">
+        <div class="hcard-name">Harald III</div>
+        <div class="hcard-type">Water · Attack · Epic</div>
+        <p class="hcard-desc">Viking king of the north — his ice warriors shatter all formations.</p>
+        <div class="hcard-stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star e">★</span></div>
+      </div>
+    </div>
+    <div class="hcard fu">
+      <div class="hcard-img">
+        <img src="https://images.weserv.nl/?url=static.wikia.nocookie.net/infinity-kingdom/images/e/e6/Robin_Hood_icon.png/revision/latest&w=260&h=200&fit=cover&q=82&we" alt="Robin Hood" loading="lazy">
+        <div class="hcard-badge ee">🌿</div>
+      </div>
+      <div class="hcard-body">
+        <div class="hcard-name">Robin Hood</div>
+        <div class="hcard-type">Earth · Ranged · Epic</div>
+        <p class="hcard-desc">Sherwood's outlaw — arrows that never miss, no matter the range.</p>
+        <div class="hcard-stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star e">★</span><span class="star e">★</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ ELEMENTS ══ -->
+<section id="elements" class="elements-section">
+  <div class="sh fu">
+    <span class="eyebrow">Combat System</span>
+    <h2 class="sec-title">Seven Elements</h2>
+    <div class="sec-rule"><span>◆</span></div>
+    <p class="sec-desc">Master elemental affinities to forge unstoppable battle formations. Strengths, weaknesses — every choice matters.</p>
+  </div>
+  <div class="el-wheel fu">
+    <div class="el-pill pw"><span class="ei">💧</span> Water</div>
+    <div class="el-pill pf"><span class="ei">🔥</span> Fire</div>
+    <div class="el-pill pe"><span class="ei">🌿</span> Earth</div>
+    <div class="el-pill pv"><span class="ei">🌀</span> Wind</div>
+    <div class="el-pill pl"><span class="ei">⚡</span> Lightning</div>
+    <div class="el-pill ph"><span class="ei">✨</span> Holy</div>
+    <div class="el-pill ps"><span class="ei">🌑</span> Shadow</div>
+  </div>
+</section>
+
+<!-- ══ PLAYER REVIEWS ══ -->
+<section id="reviews" class="reviews-section">
+  <div class="sh fu">
+    <span class="eyebrow">Player Reviews</span>
+    <h2 class="sec-title">What Lords Are Saying</h2>
+    <div class="sec-rule"><span>◆</span></div>
+  </div>
+
+  <!-- Rating callout -->
+  <div class="rating-callout fu">
+    <div class="rating-big">4.7</div>
+    <div class="rating-stars-big">★★★★★</div>
+    <div class="rating-count">Based on 280,000+ reviews · App Store & Google Play</div>
+  </div>
+
+  <div class="reviews-grid">
+    <div class="rcard fu">
+      <div class="rcard-stars">★★★★★</div>
+      <p class="rcard-text">Absolutely addictive. The Immortal system is genius — I've been playing for 8 months and still discovering new synergies every week.</p>
+      <div class="rcard-author">
+        <div class="rcard-avatar">DK</div>
+        <div><div class="rcard-name">DragonKing_Alex</div><div class="rcard-meta">App Store · Verified Purchase · 850h played</div></div>
+      </div>
+    </div>
+    <div class="rcard fu">
+      <div class="rcard-stars">★★★★★</div>
+      <p class="rcard-text">The alliance wars are the best content I've seen in a strategy game. Coordinating with 50 players for a siege is pure adrenaline.</p>
+      <div class="rcard-author">
+        <div class="rcard-avatar">SQ</div>
+        <div><div class="rcard-name">StormQueen</div><div class="rcard-meta">Google Play · Alliance Officer · 1,200h played</div></div>
+      </div>
+    </div>
+    <div class="rcard fu">
+      <div class="rcard-stars">★★★★☆</div>
+      <p class="rcard-text">Great historical depth — having Cleopatra fight alongside Attila is wild. The elemental system adds real depth to team-building.</p>
+      <div class="rcard-author">
+        <div class="rcard-avatar">IR</div>
+        <div><div class="rcard-name">IronRealm</div><div class="rcard-meta">PC Player · Top 100 Server · 600h played</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FEATURES ══ -->
+<section class="features-section">
+  <div class="sh fu">
+    <span class="eyebrow">Why Play</span>
+    <h2 class="sec-title">An Empire to Build</h2>
+    <div class="sec-rule"><span>◆</span></div>
+  </div>
+  <div class="feat-grid">
+    <div class="feat fu" data-n="I">
+      <span class="feat-icon">⚔️</span>
+      <h3>Epic PvP Battles</h3>
+      <p>Face millions of players in real-time strategy battles. Form alliances, coordinate massive sieges, and dominate the Norheim leaderboard.</p>
+      <span class="feat-tag">PvP · Alliance Wars</span>
+    </div>
+    <div class="feat fu" data-n="II">
+      <span class="feat-icon">🏰</span>
+      <h3>Build Your Kingdom</h3>
+      <p>Construct and upgrade your castle across dozens of building types. Expand across the world map and claim territory for your alliance.</p>
+      <span class="feat-tag">Strategy · City Building</span>
+    </div>
+    <div class="feat fu" data-n="III">
+      <span class="feat-icon">🐉</span>
+      <h3>Raise Dragons</h3>
+      <p>Tame and evolve dragons of all seven elements. Each grants unique combat bonuses and devastating special abilities.</p>
+      <span class="feat-tag">7 Elements · Dragons</span>
+    </div>
+    <div class="feat fu" data-n="IV">
+      <span class="feat-icon">🗺️</span>
+      <h3>Living World Map</h3>
+      <p>Explore a massive shared world with thousands of players. Capture ancient ruins, contest resources, and reshape the political map.</p>
+      <span class="feat-tag">Open World · Exploration</span>
+    </div>
+    <div class="feat fu" data-n="V">
+      <span class="feat-icon">🏆</span>
+      <h3>Seasonal Events</h3>
+      <p>New limited Immortals, exclusive skins, and global tournaments every season. The meta is always evolving — adapt or be conquered.</p>
+      <span class="feat-tag">Events · Rewards</span>
+    </div>
+    <div class="feat fu" data-n="VI">
+      <span class="feat-icon">📱</span>
+      <h3>Cross-Platform</h3>
+      <p>Seamless play on iOS, Android, and PC. Your progress syncs instantly — battle at your desk or on the go, no interruption.</p>
+      <span class="feat-tag">iOS · Android · PC</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FAQ ══ -->
+<section id="faq" class="faq-section">
+  <div class="sh fu">
+    <span class="eyebrow">Frequently Asked</span>
+    <h2 class="sec-title">Got Questions?</h2>
+    <div class="sec-rule"><span>◆</span></div>
+  </div>
+  <div class="faq-list">
+    <div class="faq-item fu">
+      <button class="faq-q" aria-expanded="false">Is Infinity Kingdom truly free to play? <span class="faq-icon">+</span></button>
+      <div class="faq-a"><p class="faq-a-inner">Yes — Infinity Kingdom is 100% free to download and play on iOS, Android, and PC. Optional in-game purchases exist for cosmetics and convenience, but all core gameplay and Immortals can be earned through normal play.</p></div>
+    </div>
+    <div class="faq-item fu">
+      <button class="faq-q" aria-expanded="false">Can I play on both mobile and PC with the same account? <span class="faq-icon">+</span></button>
+      <div class="faq-a"><p class="faq-a-inner">Absolutely. Your progress is tied to your account and syncs across all platforms in real time. Switch between your phone and desktop without losing a single resource.</p></div>
+    </div>
+    <div class="faq-item fu">
+      <button class="faq-q" aria-expanded="false">How do I get legendary Immortals like Merlin or Caesar? <span class="faq-icon">+</span></button>
+      <div class="faq-a"><p class="faq-a-inner">Legendary Immortals are obtained through the Advanced Summon system, special events, and the Mysterious Pearl Shop. Many can be earned completely free by accumulating in-game currency through daily quests and alliance rewards.</p></div>
+    </div>
+    <div class="faq-item fu">
+      <button class="faq-q" aria-expanded="false">Is there a guild or alliance system? <span class="faq-icon">+</span></button>
+      <div class="faq-a"><p class="faq-a-inner">Yes — the alliance system is central to Infinity Kingdom. Join or create an alliance of up to 100 lords, coordinate massive war efforts, share resources, and compete in cross-server championship events.</p></div>
+    </div>
+    <div class="faq-item fu">
+      <button class="faq-q" aria-expanded="false">How much storage space does the game require? <span class="faq-icon">+</span></button>
+      <div class="faq-a"><p class="faq-a-inner">Infinity Kingdom requires approximately 1.5 GB on iOS and Android, and around 2.5 GB on PC. We recommend a stable internet connection for the best experience during alliance battles.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FINAL CTA ══ -->
+<section id="cta" class="cta-section">
+  <div class="cta-glow"></div>
+  <span class="cta-eyebrow">Join Millions of Lords</span>
+  <h2 class="cta-title">Your Reign<br>Starts Now</h2>
+  <p class="urgency"><span></span>50,000+ players online right now</p>
+  <p class="cta-sub">Download free. No credit card. No pay-to-win. Just strategy, glory, and the most legendary heroes in history.</p>
+  <div class="cta-btns">
+    <button class="btn-primary">▶ Play Now — It's Free</button>
+    <button class="btn-secondary" onclick="document.getElementById('heroes').scrollIntoView({behavior:'smooth'})">Browse Immortals</button>
+  </div>
+  <div class="dl-row">
+    <div class="badge"><span class="badge-icon">🍎</span><div class="badge-text"><span class="badge-small">Download on the</span><span class="badge-big">App Store</span></div></div>
+    <div class="badge"><span class="badge-icon">▶</span><div class="badge-text"><span class="badge-small">Get it on</span><span class="badge-big">Google Play</span></div></div>
+    <div class="badge"><span class="badge-icon">🖥</span><div class="badge-text"><span class="badge-small">Play on</span><span class="badge-big">PC / Mac</span></div></div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <span class="footer-logo">Infinity Kingdom</span>
+  <div class="footer-links">
+    <a href="#">Privacy Policy</a>
+    <a href="#">Terms of Service</a>
+    <a href="#">Support</a>
+    <a href="#">Press Kit</a>
+  </div>
+  <span>© 2026 Thunder Cloud Studio · All rights reserved</span>
+</footer>
+
+<script>
+/* ── Intersection Observer: fade-up ── */
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('v'); io.unobserve(e.target); }
+  });
+}, { threshold: 0.07, rootMargin: '0px 0px -30px 0px' });
+document.querySelectorAll('.fu').forEach(el => io.observe(el));
+
+/* ── FAQ accordion ── */
+document.querySelectorAll('.faq-q').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.closest('.faq-item');
+    const isOpen = item.classList.contains('open');
+    // Close all
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    document.querySelectorAll('.faq-q').forEach(b => b.setAttribute('aria-expanded','false'));
+    // Open clicked if it wasn't open
+    if (!isOpen) {
+      item.classList.add('open');
+      btn.setAttribute('aria-expanded','true');
+    }
+  });
+});
+
+/* ── Lazy video load (performance: no iframe until click) ── */
+function loadVideo() {
+  const frame = document.getElementById('yt-frame');
+  const poster = document.getElementById('vposter');
+  // Use the official Infinity Kingdom trailer video ID
+  frame.src = 'https://www.youtube.com/embed/RqDVRZLHcDU?autoplay=1&rel=0&modestbranding=1';
+  frame.style.display = 'block';
+  poster.style.display = 'none';
+}
+
+/* ── Mobile nav: hide on scroll down, show on scroll up ── */
+let lastY = 0;
+const hdr = document.querySelector('header');
+window.addEventListener('scroll', () => {
+  const y = window.scrollY;
+  hdr.style.transform = y > lastY && y > 80 ? 'translateY(-100%)' : 'translateY(0)';
+  hdr.style.transition = 'transform .3s ease';
+  lastY = y;
+}, { passive: true });
+</script>
 </body>
 </html>
-
-
-
